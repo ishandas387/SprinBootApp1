@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Emp</title>
+<style>
+table, th, td {
+	border: 1px solid black;
+	border-spacing: 0px;
+}
+
+th, td {
+	padding: 10px;
+}
+
+.jumbotron {
+	background-color: #f4511e;
+	color: #fff;
+	padding: 100px 25px;
+}
+
+.container-fluid {
+	padding: 60px 50px;
+}
+
+.bg-grey {
+	background-color: #f6f6f6;
+}
+</style>
+</head>
+<body>
+	<div class="jumbotron text-center">
+		<h1>Company</h1>
+		<p>Employee Directory</p>
+		<form class="form-inline" action="/employee/'+id">
+			<div class="input-group">
+				<input type="text" class="form-control" size="25"
+					placeholder="Employee Id" name="id" required="required"  ></input>
+				<div class="input-group-btn">
+					<button type="submit" class="btn btn-danger" >Search</button>
+			
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="container-fluid">
+
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>EmpId</th>
+					<th>Name</th>
+					<th>Department</th>
+					<th>/</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="emp : ${emplist}">
+					<td th:text="${emp.id}"></td>
+					<td th:text="${emp.name}"></td>
+					<td th:text="${emp.department}"></td>
+					<td>
+    <a th:href="@{emp/del/{id}(id=${emp.id})}"><span>Delete</span></a>
+</td>
+	<td>
+    <a th:href="@{emp/up/{id}(id=${emp.id})}"><span>Update</span></a>
+</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<br />
+
+	<div class="container-fluid bg-grey">
+		<h2>Add Employee</h2>
+		<form class="form-inline" action="/emps" method="POST">
+			Name <input class="form-control" type="text"
+				placeholder="Employee Name" id="Name" name="name"></input>
+			Department <input type="text" class="form-control" id="Department"
+				placeholder="Employee Department" name="department"> </input> <input
+				type="submit" value="Add to List" class="btn btn-danger"></input>
+		</form>
+	</div>
+
+	<h2>xyz xyz</h2>
+	<!-- <form action="/search" method="GET">
+		<input type="text" name="search" id="search" th:value="${search}"></input>
+		<input type="submit" value="Search"></input>
+	</form> -->
+</body>
+</html>
